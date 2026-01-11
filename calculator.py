@@ -112,15 +112,15 @@ class Counter(QWidget):
         self.be.clicked.connect(self.calculate)
 
     def add_to_expression(self):
-        button = self.sender()           # which button was clicked
-        self.expression += button.text() # append its text
+        button = self.sender()# which button was clicked
+        self.expression += button.text()# append its text
         self.label.setText(self.expression)
 
     def calculate(self):
         try:
-            result = str(eval(self.expression))
+            result=str(eval(self.expression))
             self.label.setText(result)
-            self.expression = result   # allows chaining (e.g. 5 + 2 + 3)
+            self.expression = result# allows chaining (e.g. 5 + 2 + 3)
         except:
             self.label.setText("Error")
             self.expression = ""
@@ -128,7 +128,7 @@ class Counter(QWidget):
 def main():
     app=QApplication(sys.argv)
     counter=Counter()
-    counter.show()
+    counter.show()  
     sys.exit(app.exec_())
 
 if __name__=="__main__":
