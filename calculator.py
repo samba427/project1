@@ -9,6 +9,7 @@ class Counter(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.expression = ""
         self.setGeometry(750,300,500,500)
         self.label=QLabel(self) #remember that the label is the main number we are displaying basically... and the label always displays as strings
         self.b1=QPushButton("1", self)
@@ -23,7 +24,7 @@ class Counter(QWidget):
         self.b0=QPushButton("0", self)
         self.bp=QPushButton("+", self)
         self.bm=QPushButton("-", self)
-        self.bx=QPushButton("X", self)
+        self.bx=QPushButton("*", self)
         self.bd=QPushButton("/", self)
         self.bf=QPushButton(".", self)
         self.be=QPushButton("=", self)
@@ -93,17 +94,36 @@ class Counter(QWidget):
         self.setLayout(vbox)
         
         #functionality connections
-        self.b1.clicked.connect(self.one)
-        self.b2.clicked.connect(self.two)
-        self.bp.clicked.connect(self.plus)
+        self.b1.clicked.connect(self.add_to_expression)
+        self.b2.clicked.connect(self.add_to_expression)
+        self.b3.clicked.connect(self.add_to_expression)
+        self.b4.clicked.connect(self.add_to_expression)
+        self.b5.clicked.connect(self.add_to_expression)
+        self.b6.clicked.connect(self.add_to_expression)
+        self.b7.clicked.connect(self.add_to_expression)
+        self.b8.clicked.connect(self.add_to_expression)
+        self.b9.clicked.connect(self.add_to_expression)
+        self.b0.clicked.connect(self.add_to_expression)
+        self.bp.clicked.connect(self.add_to_expression)
+        self.bm.clicked.connect(self.add_to_expression)
+        self.bx.clicked.connect(self.add_to_expression)
+        self.bd.clicked.connect(self.add_to_expression)
+        self.bf.clicked.connect(self.add_to_expression)
+        self.be.clicked.connect(self.calculate)
 
-    def one(self):
-        self.label.setText(self.b1.text)
-    def two(self):
-        self.label.setText(self.label.text + self.b2.text)
-    def plus(self):
-        self.label.setText(self.label.text + self.bp.text)
-        
+    def add_to_expression(self):
+        button = self.sender()           # which button was clicked
+        self.expression += button.text() # append its text
+        self.label.setText(self.expression)
+
+    def calculate(self):
+        try:
+            result = str(eval(self.expression))
+            self.label.setText(result)
+            self.expression = result   # allows chaining (e.g. 5 + 2 + 3)
+        except:
+            self.label.setText("Error")
+            self.expression = ""
 
 def main():
     app=QApplication(sys.argv)
