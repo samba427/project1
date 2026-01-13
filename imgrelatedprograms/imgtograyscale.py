@@ -19,7 +19,6 @@ print(arr[0][0][0])#only the red value for the first pixel
 R=arr[:,:,0]
 G=arr[:,:,1] #we have extracted only the red green and blue values of all pixels, the : means all
 B=arr[:,:,2] #what we are writing is basically all rows and all cols of this channels 0,1,2
-
 gray=0.299*R + 0.587*G + 0.114*B #particular formula for conversion to greyscale... we are taking a weighted avg based on how heavily each colour is perceived by human eyes
 
 print(gray.shape)#we only get a height and width now as the rgb values are merged into 1
