@@ -11,14 +11,15 @@ plt.title("Original Image")
 plt.show()
 
 def compress_image(arr, block_size=8):
-    h, w, c = arr.shape
+    h, w, c = arr.shape#we are allotting all 3 of shape to height, width, and color channels which is 3 anyways
     compressed = arr.copy()
 
-    for i in range(0, h, block_size):
-        for j in range(0, w, block_size):
-            block = arr[i:i+block_size, j:j+block_size, :]
-            avg_color = block.mean(axis=(0, 1))
+    for i in range(0, h, block_size):#we are going thru rows in steps of block size
+        for j in range(0, w, block_size):#thru cols in steps of block size
+            block = arr[i:i+block_size, j:j+block_size, :]#block will be from i toi+8 and j to j+8 of the array
+            avg_color = block.mean(axis=(0, 1))#axis 0 is rows (ht) and 1 is cols (wd) we are taking avg over all the rows and cols BUT keeping colour channel separate
             compressed[i:i+block_size, j:j+block_size, :] = avg_color
+            #the third : is for colour channels to show that we are taking everything there
 
     return compressed.astype(np.uint8)
 
